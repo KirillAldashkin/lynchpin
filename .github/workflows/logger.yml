@@ -1,0 +1,17 @@
+name: Add log entry
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: "0 * * * *"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+    - uses: actions/checkout@v4
+    - name: Run logger
+      run: dotnet fsi lynchpin.fsx run
+    - uses: EndBug/add-and-commit@v9.1.4
+      with:
+        message: Adding log entry
